@@ -107,9 +107,18 @@ class CreateTodo extends StatelessWidget {
                               onTap: () {
                                 showTimePicker(
                                   context: context,
-                                  initialTime: TimeOfDay.now().replacing(
-                                    minute: TimeOfDay.now().minute + 2,
-                                  ),
+                                  initialTime: value.selectedTime,
+                                  builder: (context, child) {
+                                    return Theme(
+                                      data: theme.copyWith(useMaterial3: false),
+                                      child: MediaQuery(
+                                        data: MediaQuery.of(context).copyWith(
+                                          alwaysUse24HourFormat: false,
+                                        ),
+                                        child: child!,
+                                      ),
+                                    );
+                                  },
                                 ).then((time) {
                                   if (time != null) {
                                     value.setTime(time, context);
