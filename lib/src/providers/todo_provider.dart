@@ -5,6 +5,7 @@ import 'package:flutter_assignment/src/models/todo_model.dart';
 import 'package:flutter_assignment/src/providers/auth_provider.dart';
 import 'package:flutter_assignment/src/repository/calendar_repository.dart';
 import 'package:flutter_assignment/src/repository/todos_repository.dart';
+import 'package:flutter_assignment/src/utils/snackbar.dart';
 import 'package:intl/intl.dart';
 
 /// [TodoProvider] for managing Todo
@@ -82,6 +83,13 @@ class TodoProvider extends ChangeNotifier {
 
   /// [createTodo] for creating Todo
   Future<void> createTodo(BuildContext context) async {
+    if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
+      SnackbarUtils.show(
+        message: 'Please enter title and description',
+        type: SnackbarType.error,
+      );
+      return;
+    }
     final userEmail = AuthService.currentUser!.email!;
     var todoModel = TodoModel(
       createdAt: DateTime.now(),

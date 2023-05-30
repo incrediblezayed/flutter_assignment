@@ -37,21 +37,22 @@ class AppDialog {
             ),
             child: SizedBox.square(
               dimension: MediaQuery.of(context).size.width * 0.2,
-              child: const Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  FittedBox(
+                  const FittedBox(
                     child: CircularProgressIndicator(
                       strokeWidth: 2,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
                     'Loading...',
                     textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge,
                   )
                 ],
               ),
