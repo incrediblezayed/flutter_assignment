@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/src/models/todo_model.dart';
 import 'package:flutter_assignment/src/providers/todo_provider.dart';
+import 'package:flutter_assignment/src/utils/routes.dart';
 import 'package:flutter_assignment/src/widgets/added_to_calendar.dart';
 import 'package:flutter_assignment/src/widgets/cutom_list_tile.dart';
 import 'package:flutter_assignment/src/widgets/remaining_timer.dart';
@@ -263,7 +264,23 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                       style: theme.textTheme.bodyLarge,
                     )
                 ],
-              )
+              ),
+              Divider(
+                color: theme.dividerColor,
+              ),
+              CustomListTile(
+                borderColor: Colors.grey,
+                text: 'Delete',
+                icon: Icons.delete_outline,
+                iconColor: Colors.red,
+                futureTask: () async {
+                  await todoProvider.deleteTodo(
+                    todo,
+                    context,
+                  );
+                  AppRoutes.pop();
+                },
+              ),
             ],
           ),
         ),
