@@ -1,7 +1,7 @@
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_assignment/src/ui/root.dart';
+import 'package:flutter_assignment/src/ui/splash_screen.dart';
 import 'package:flutter_assignment/src/utils/routes.dart';
 import 'package:flutter_assignment/src/utils/snackbar.dart';
 import 'package:flutter_assignment/src/utils/theme.dart';
@@ -27,7 +27,7 @@ class TodoApp extends StatelessWidget {
       home: const ConnectivityWidgetWrapper(
         alignment: Alignment.bottomCenter,
         message: 'No Internet Connection',
-        child: RootWidget(),
+        child: SplashScreen(),
       ),
     );
   }

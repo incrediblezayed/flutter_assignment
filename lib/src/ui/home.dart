@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/src/models/todo_model.dart';
+import 'package:flutter_assignment/src/providers/auth_provider.dart';
 import 'package:flutter_assignment/src/ui/create_todo.dart';
 import 'package:flutter_assignment/src/utils/assets.dart';
 import 'package:flutter_assignment/src/utils/dialog.dart';
@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
     final todos = Provider.of<List<TodoModel?>>(context);
     final mediaQuery = MediaQuery.of(context);
     final theme = Theme.of(context);
-    final user = Provider.of<User?>(context);
+    final user = AuthService.currentUser;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
@@ -101,6 +101,7 @@ class HomePage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'create_todo',
         backgroundColor: theme.colorScheme.secondary,
         onPressed: () {
           AppRoutes.push(const CreateTodo());

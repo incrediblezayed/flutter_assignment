@@ -7,6 +7,7 @@ import 'package:flutter_assignment/src/providers/todo_provider.dart';
 import 'package:flutter_assignment/src/utils/dialog.dart';
 import 'package:flutter_assignment/src/utils/routes.dart';
 import 'package:flutter_assignment/src/utils/snackbar.dart';
+import 'package:flutter_assignment/src/widgets/added_to_calendar.dart';
 import 'package:flutter_assignment/src/widgets/app_button.dart';
 import 'package:flutter_assignment/src/widgets/app_textfield.dart';
 import 'package:intl/intl.dart';
@@ -29,6 +30,7 @@ class CreateTodo extends StatelessWidget {
             title: const Text('Create Todo'),
           ),
           bottomNavigationBar: AppButton(
+            heroTag: 'create_todo',
             onPressed: () async {
               unawaited(AppDialog.showLoading<void>());
               await value.createTodo(
@@ -264,9 +266,8 @@ class CreateTodo extends StatelessWidget {
                         onChanged: (switchVal) {
                           value.addEventToGoogleCalendar = switchVal;
                         },
-                        title: Text(
-                          'Add this event to your google calendar',
-                          style: theme.textTheme.titleLarge,
+                        title: const AddedToCalendar(
+                          isAdded: false,
                         ),
                       ),
                     ],

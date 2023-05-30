@@ -1,5 +1,4 @@
 import 'package:connectivity_wrapper/connectivity_wrapper.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/src/models/todo_model.dart';
 import 'package:flutter_assignment/src/providers/auth_provider.dart';
@@ -25,10 +24,6 @@ class AppScope extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        StreamProvider(
-          create: (_) => AuthService.authStateChanges,
-          initialData: null,
-        ),
         ChangeNotifierProvider(create: (_) => StorageProvider()),
         ChangeNotifierProvider(create: (_) => TodoProvider()),
       ],
@@ -39,7 +34,7 @@ class AppScope extends StatelessWidget {
                   providers: [
                     StreamProvider<List<TodoModel?>>(
                       create: (_) => TodosRepository.getTodos(
-                        Provider.of<User?>(context)?.email,
+                        AuthService.currentUser?.email,
                       ),
                       initialData: const [],
                     ),

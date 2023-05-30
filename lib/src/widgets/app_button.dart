@@ -11,10 +11,14 @@ class AppButton extends StatefulWidget {
     this.textColor,
     this.width,
     this.borderColor,
+    this.heroTag,
   });
 
   /// The child widget to be displayed inside the button.
   final Widget child;
+
+  /// The hero tag for the button.
+  final String? heroTag;
 
   /// The width of the button.
   final double? width;
@@ -58,38 +62,44 @@ class _AppButtonState extends State<AppButton>
       end: (widget.width ?? mediaQuery.size.width * 0.8) -
           ((widget.width ?? mediaQuery.size.width * 0.8) * 0.05),
     ).animate(_controller);
-    return GestureDetector(
-      onTapDown: (d) {
-        _controller.forward();
-      },
-      onTapUp: (d) {
-        _controller.reverse();
-      },
-      onTapCancel: () {
-        _controller.reverse();
-      },
-      onTap: widget.onPressed,
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Transform.scale(
-            scale:
-                _size.value / (widget.width ?? (mediaQuery.size.width * 0.8)),
-            child: Container(
-              height: 60,
-              width: widget.width ?? (mediaQuery.size.width * 0.8),
-              decoration: BoxDecoration(
-                color: widget.color ?? theme.primaryColor,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: widget.borderColor ?? Colors.transparent,
+    return Hero(
+      tag: widget.heroTag ?? UniqueKey(),
+      child: Material(
+        type: MaterialType.transparency,
+        child: InkWell(
+          onTapDown: (d) {
+            _controller.forward();
+          },
+          onTapUp: (d) {
+            _controller.reverse();
+          },
+          onTapCancel: () {
+            _controller.reverse();
+          },
+          onTap: widget.onPressed,
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Transform.scale(
+                scale: _size.value /
+                    (widget.width ?? (mediaQuery.size.width * 0.8)),
+                child: Container(
+                  height: 60,
+                  width: widget.width ?? (mediaQuery.size.width * 0.8),
+                  decoration: BoxDecoration(
+                    color: widget.color ?? theme.primaryColor,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: widget.borderColor ?? Colors.transparent,
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                  child: widget.child,
                 ),
-              ),
-              alignment: Alignment.center,
-              child: widget.child,
-            ),
-          );
-        },
+              );
+            },
+          ),
+        ),
       ),
     );
   }

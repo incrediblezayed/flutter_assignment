@@ -220,11 +220,9 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                                       context,
                                     );
                                   } else {
-                                    todo = todo.copyWith(isCompleted: false);
-                                    await todoProvider.updateTodo(
-                                      todo.copyWith(
-                                        subTasks: subTasks,
-                                      ),
+                                    await todoProvider.markTodoAsInCompleted(
+                                      todo,
+                                      context,
                                     );
                                   }
 
@@ -250,7 +248,11 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                 text: todo.isCompleted ? 'Completed' : 'Mark as completed',
                 futureTask: () async {
                   if (todo.subTasks.isEmpty) {
-                    await todoProvider.markTodoAsCompleted(todo, context);
+                    if (todo.isCompleted) {
+                      await todoProvider.markTodoAsInCompleted(todo, context);
+                    } else {
+                      await todoProvider.markTodoAsCompleted(todo, context);
+                    }
                     setState(() {});
                   }
                 },

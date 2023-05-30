@@ -5,6 +5,12 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthService {
   AuthService._();
 
+  static final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'https://www.googleapis.com/auth/calendar',
+    ],
+  );
+
   /// Singleton instance of [FirebaseAuth].
   static final instance = FirebaseAuth.instance;
 
@@ -17,12 +23,7 @@ class AuthService {
 
   /// Logs in the user using Google Sign In.
   static Future<String?> login() async {
-    final googleSignIn = GoogleSignIn(
-      scopes: [
-        'https://www.googleapis.com/auth/calendar',
-      ],
-    );
-    final googleSignInAccount = await googleSignIn.signIn();
+    final googleSignInAccount = await _googleSignIn.signIn();
     if (googleSignInAccount != null) {
       final googleSignInAuthentication =
           await googleSignInAccount.authentication;
@@ -39,6 +40,7 @@ class AuthService {
 
   /// Logs out the user.
   static Future<void> logout() async {
+    await _googleSignIn.signOut();
     await instance.signOut();
   }
 }

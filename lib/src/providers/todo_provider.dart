@@ -1,12 +1,11 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/src/models/todo_model.dart';
+import 'package:flutter_assignment/src/providers/auth_provider.dart';
 import 'package:flutter_assignment/src/repository/calendar_repository.dart';
 import 'package:flutter_assignment/src/repository/todos_repository.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 /// [TodoProvider] for managing Todo
 class TodoProvider extends ChangeNotifier {
@@ -83,7 +82,7 @@ class TodoProvider extends ChangeNotifier {
 
   /// [createTodo] for creating Todo
   Future<void> createTodo(BuildContext context) async {
-    final userEmail = Provider.of<User?>(context, listen: false)!.email!;
+    final userEmail = AuthService.currentUser!.email!;
     var todoModel = TodoModel(
       createdAt: DateTime.now(),
       description: descriptionController.text,
@@ -156,6 +155,19 @@ class TodoProvider extends ChangeNotifier {
     }
     await TodosRepository.updateTodo(
       todoModel: todoModel.copyWith(isCompleted: true),
+    );
+  }
+
+  /// [markTodoAsInCompleted] for marking Todo as incompleted
+  Future<void> markTodoAsInCompleted(
+    TodoModel todoModel,
+    BuildContext context,
+  ) async {
+    if (todoModel.isAddedInCalendar) {
+      await addToCalendar(todoModel, context);
+    }
+    await TodosRepository.updateTodo(
+      todoModel: todoModel.copyWith(isCompleted: false),
     );
   }
 

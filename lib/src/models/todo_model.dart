@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 enum Priority {
   low(color: Colors.blue, icon: Icons.info_sharp, text: 'Low'),
   medium(
-    color: Colors.amber,
+    color: Colors.orange,
     icon: Icons.warning,
     text: 'Medium',
   ),
