@@ -191,11 +191,8 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                                   borderColor: e.isCompleted
                                       ? theme.colorScheme.primary
                                       : Colors.grey,
-                                  iconColor: e.isCompleted
-                                      ? theme.primaryColor
-                                      : theme.colorScheme.onSurface,
+                                  isCompleted: e.isCompleted,
                                   text: e.title,
-                                  icon: Icons.check_circle_outline_sharp,
                                   children: [
                                     IgnorePointer(
                                       child: SwitchListTile(
@@ -244,9 +241,13 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                   borderColor: todo.isCompleted
                       ? theme.colorScheme.primary
                       : Colors.grey,
-                  trailing: Switch(
-                    value: todo.isCompleted,
-                    onChanged: (value) {},
+                  trailing: Transform.scale(
+                    scale: 0.8,
+                    child: Switch(
+                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                      value: todo.isCompleted,
+                      onChanged: (value) {},
+                    ),
                   ),
                   text: todo.isCompleted ? 'Completed' : 'Mark as completed',
                   futureTask: () async {
@@ -273,8 +274,10 @@ class _TodoDetailsPageState extends State<TodoDetailsPage> {
                 CustomListTile(
                   borderColor: Colors.grey,
                   text: 'Delete',
-                  icon: Icons.delete_outline,
-                  iconColor: Colors.red,
+                  trailing: const Icon(
+                    Icons.delete_outline,
+                    color: Colors.red,
+                  ),
                   futureTask: () async {
                     await todoProvider.deleteTodo(
                       todo,

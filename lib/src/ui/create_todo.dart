@@ -26,7 +26,6 @@ class CreateTodo extends StatelessWidget {
       builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: theme.primaryColor,
             title: const Text('Create Todo'),
           ),
           bottomNavigationBar: AppButton(
@@ -143,7 +142,7 @@ class CreateTodo extends StatelessWidget {
                           border: Border.all(
                             color: theme.dividerColor,
                           ),
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: ClipRRect(
                           child: Row(
@@ -153,10 +152,10 @@ class CreateTodo extends StatelessWidget {
                                   child: InkWell(
                                     borderRadius: BorderRadius.horizontal(
                                       left: e == Priority.low
-                                          ? const Radius.circular(16)
+                                          ? const Radius.circular(8)
                                           : Radius.zero,
                                       right: e == Priority.high
-                                          ? const Radius.circular(16)
+                                          ? const Radius.circular(8)
                                           : Radius.zero,
                                     ),
                                     onTap: () {
@@ -168,10 +167,10 @@ class CreateTodo extends StatelessWidget {
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.horizontal(
                                           left: e == Priority.low
-                                              ? const Radius.circular(16)
+                                              ? const Radius.circular(8)
                                               : Radius.zero,
                                           right: e == Priority.high
-                                              ? const Radius.circular(16)
+                                              ? const Radius.circular(8)
                                               : Radius.zero,
                                         ),
                                         border: Border.all(

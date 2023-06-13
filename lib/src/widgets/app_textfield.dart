@@ -38,18 +38,19 @@ class AppTextField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (labelText != null)
-          Text(
-            labelText ?? '',
-            style: theme.textTheme.titleLarge
-                ?.copyWith(fontWeight: FontWeight.w500),
+          Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Text(
+              labelText ?? '',
+              style: theme.textTheme.titleLarge
+                  ?.copyWith(fontWeight: FontWeight.w500),
+            ),
           ),
         Card(
-          color: theme.colorScheme.surface,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.circular(8),
           ),
-          elevation: 2,
-          shadowColor: theme.colorScheme.onSurface,
+          elevation: 1,
           child: TextField(
             readOnly: readOnly,
             keyboardType: TextInputType.name,

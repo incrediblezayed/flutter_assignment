@@ -15,46 +15,44 @@ class AppTheme extends ChangeNotifier {
 
   late StorageProvider _storageProvider;
 
-  final Color _primaryColor = const Color(0xFF24A19C);
+  //final Color _primaryColor = const Color(0xFF24A19C);
 
   /// Returns the light theme data.
-  ThemeData get lightTheme => ThemeData.light().copyWith(
+  ThemeData lightTheme(ColorScheme? colorScheme) => ThemeData.light().copyWith(
         useMaterial3: true,
-        primaryColor: _primaryColor,
-        textTheme: TextTheme(
-          headlineLarge: const TextStyle(
+        colorScheme: colorScheme,
+        primaryColor: colorScheme?.primary,
+        primaryColorDark: colorScheme?.primaryContainer,
+        primaryColorLight: colorScheme?.primary,
+        //primaryColor: _primaryColor,
+        textTheme: const TextTheme(
+          headlineLarge: TextStyle(
             color: Colors.black,
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
           titleLarge: TextStyle(
-            color: _primaryColor,
+            //  color: _primaryColor,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
-          bodyLarge: const TextStyle(
+          bodyLarge: TextStyle(
             color: Colors.black87,
             fontSize: 16,
             fontWeight: FontWeight.w300,
           ),
-          headlineMedium: const TextStyle(
+          headlineMedium: TextStyle(
             color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-          bodySmall: const TextStyle(
+          bodySmall: TextStyle(
             color: Colors.black87,
             fontSize: 14,
             fontWeight: FontWeight.w300,
           ),
         ),
-        dividerColor: Colors.grey.shade300,
-        colorScheme: const ColorScheme.light().copyWith(
-          primary: _primaryColor,
-          onPrimary: Colors.white,
-          onSecondary: Colors.grey.shade400,
-          onSurface: Colors.black,
-        ),
+
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
             TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
@@ -64,44 +62,43 @@ class AppTheme extends ChangeNotifier {
       );
 
   /// Returns the light theme data.
-  ThemeData get darkTheme => ThemeData.dark().copyWith(
+  ThemeData darkTheme(ColorScheme? colorScheme) => ThemeData.dark().copyWith(
         useMaterial3: true,
-        primaryColor: _primaryColor,
-        scaffoldBackgroundColor: Colors.black87,
-        textTheme: TextTheme(
-          headlineLarge: const TextStyle(
+        colorScheme: colorScheme,
+        primaryColor: colorScheme?.primary,
+        primaryColorDark: colorScheme?.primaryContainer,
+        primaryColorLight: colorScheme?.primary,
+        scaffoldBackgroundColor: colorScheme?.background,
+
+        //   primaryColor: _primaryColor,
+        textTheme: const TextTheme(
+          headlineLarge: TextStyle(
             color: Colors.white,
             fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
           titleLarge: TextStyle(
-            color: _primaryColor,
+            //  color: _primaryColor,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
-          bodyLarge: const TextStyle(
+          bodyLarge: TextStyle(
             color: Colors.white60,
             fontSize: 16,
             fontWeight: FontWeight.w300,
           ),
-          headlineMedium: const TextStyle(
+          headlineMedium: TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
-          bodySmall: const TextStyle(
+          bodySmall: TextStyle(
             color: Colors.white,
             fontSize: 14,
             fontWeight: FontWeight.w300,
           ),
         ),
-        dividerColor: Colors.grey.shade700,
-        colorScheme: const ColorScheme.dark().copyWith(
-          primary: _primaryColor,
-          onPrimary: Colors.black,
-          onSecondary: Colors.grey.shade700,
-          onSurface: Colors.white,
-        ),
+
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: {
             TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),

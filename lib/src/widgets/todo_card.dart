@@ -26,7 +26,7 @@ class TodoCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(8),
         child: InkWell(
           onTap: () {
             AppRoutes.push(
@@ -37,15 +37,15 @@ class TodoCard extends StatelessWidget {
               ),
             );
           },
-          child: ColoredBox(
-            color: theme.dividerColor.withOpacity(0.5),
+          child: Card(
+            margin: EdgeInsets.zero,
             child: Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: todoModel.priority.color,
+                    color: todoModel.priority.color.withOpacity(0.2),
                     borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(16),
+                      top: Radius.circular(8),
                     ),
                   ),
                   width: double.infinity,
@@ -94,10 +94,12 @@ class TodoCard extends StatelessWidget {
                                               AppRoutes.pop();
                                             });
                                           },
-                                          icon: Icons.check_box,
                                           text: 'Mark as Completed',
                                           textColor: Colors.green,
-                                          iconColor: Colors.green,
+                                          trailing: const Icon(
+                                            Icons.check_box,
+                                            color: Colors.green,
+                                          ),
                                           borderColor: Colors.green,
                                         ),
                                       ),
@@ -113,9 +115,11 @@ class TodoCard extends StatelessWidget {
                                         });
                                       },
                                       borderColor: Colors.red,
-                                      iconColor: Colors.red,
+                                      trailing: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
                                       textColor: Colors.red,
-                                      icon: Icons.delete,
                                       text: 'Delete',
                                     ),
                                   ],
@@ -124,7 +128,10 @@ class TodoCard extends StatelessWidget {
                             },
                           );
                         },
-                        child: const Icon(Icons.more_horiz),
+                        child: const SizedBox.square(
+                          dimension: 30,
+                          child: Icon(Icons.more_horiz),
+                        ),
                       )
                     ],
                   ),

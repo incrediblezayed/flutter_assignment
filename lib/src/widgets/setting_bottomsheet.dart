@@ -31,7 +31,7 @@ class SettingsBottomSheet extends StatelessWidget {
               border: Border.all(
                 color: theme.dividerColor,
               ),
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(8),
             ),
             child: ClipRRect(
               child: Row(
@@ -39,7 +39,7 @@ class SettingsBottomSheet extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       borderRadius: const BorderRadius.horizontal(
-                        left: Radius.circular(16),
+                        left: Radius.circular(8),
                       ),
                       onTap: () {
                         appTheme.setThemeMode(
@@ -50,7 +50,7 @@ class SettingsBottomSheet extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: const BorderRadius.horizontal(
-                            left: Radius.circular(16),
+                            left: Radius.circular(8),
                           ),
                           border: Border.all(
                             color: appTheme.themeMode == ThemeMode.system
@@ -95,7 +95,7 @@ class SettingsBottomSheet extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       borderRadius: const BorderRadius.horizontal(
-                        right: Radius.circular(16),
+                        right: Radius.circular(8),
                       ),
                       onTap: () {
                         appTheme.setThemeMode(
@@ -106,7 +106,7 @@ class SettingsBottomSheet extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: const BorderRadius.horizontal(
-                            right: Radius.circular(16),
+                            right: Radius.circular(8),
                           ),
                           border: Border.all(
                             color: appTheme.themeMode == ThemeMode.dark
@@ -133,9 +133,11 @@ class SettingsBottomSheet extends StatelessWidget {
               await AuthService.logout();
               AppRoutes.pop();
             },
-            icon: Icons.power_settings_new_outlined,
+            trailing: const Icon(
+              Icons.power_settings_new_outlined,
+              color: Colors.red,
+            ),
             borderColor: Colors.red,
-            iconColor: Colors.red,
             textColor: Colors.red,
             text: 'Logout',
           )

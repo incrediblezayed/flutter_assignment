@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/src/models/todo_model.dart';
 import 'package:flutter_assignment/src/providers/auth_provider.dart';
@@ -23,12 +22,45 @@ class HomePage extends StatelessWidget {
     final user = AuthService.currentUser;
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
+      appBar: AppBar(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
+        ),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              user?.displayName ?? '',
+              style: theme.textTheme.headlineMedium,
+            ),
+            Text(
+              user?.email ?? '',
+              style: theme.textTheme.bodySmall,
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              AppDialog.showBottomSheet<void>(
+                child: (context) {
+                  return const SettingsBottomSheet();
+                },
+              );
+            },
+            icon: const Icon(
+              Icons.settings,
+            ),
+          ),
+        ],
+      )
+
+      /* PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.vertical(
-              bottom: Radius.circular(16),
+              bottom: Radius.circular(8),
             ),
             gradient: LinearGradient(
               colors: [
@@ -99,7 +131,8 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ) */
+      ,
       floatingActionButton: FloatingActionButton(
         heroTag: 'create_todo',
         backgroundColor: theme.colorScheme.secondary,
